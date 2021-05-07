@@ -11,7 +11,7 @@ class UpdateProduct extends StatefulWidget {
 }
 
 class _UpdateProductState extends State<UpdateProduct> {
-  final _globalKey = GlobalKey<FormState>();
+  final _gk = GlobalKey<FormState>();
   Map<String, dynamic> _formValues = {};
   late DateTime selectedDate;
 
@@ -30,7 +30,7 @@ class _UpdateProductState extends State<UpdateProduct> {
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Form(
-              key: _globalKey,
+              key: _gk,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
@@ -134,9 +134,9 @@ class _UpdateProductState extends State<UpdateProduct> {
   }
 
   _salvarProdutoEditado(BuildContext context) async {
-    _globalKey.currentState!.save();
+    _gk.currentState!.save();
 
-    if (!(_globalKey.currentState?.validate() ?? true)) {
+    if (!(_gk.currentState?.validate() ?? true)) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Há erro em algum dos campos!')));
 
