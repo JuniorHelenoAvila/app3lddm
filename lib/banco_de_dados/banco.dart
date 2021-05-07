@@ -1,9 +1,9 @@
-import 'package:sqflite/sqflite.dart' as sql;
-import 'package:path/path.dart' as path;
 import 'package:sqflite/sqlite_api.dart';
+import 'package:path/path.dart' as path;
+import 'package:sqflite/sqflite.dart' as sql;
 
 class SQLDatabase {
-  /// Conectar no banco de dados
+  // Conectar no banco de dados
   static Future<Database> get database async {
     final dbPath = await sql.getDatabasesPath();
 
@@ -16,7 +16,7 @@ class SQLDatabase {
     });
   }
 
-  /// Ordenando a execução de operações assíncronas
+  // operações assíncronas
   static _creatingDb(db) async {
     await db.execute(
         'CREATE TABLE IF NOT EXISTS conta (id INTEGER PRIMARY KEY, user_id INTEGER, dia_pagamento TEXT, titulo TEXT, preco REAL, descricao TEXT, FOREIGN KEY (user_id) REFERENCES users(id))');
@@ -24,12 +24,12 @@ class SQLDatabase {
         'CREATE TABLE IF NOT EXISTS ultimo_login (id INTEGER PRIMARY KEY, user_id INTEGER, esta_logado TEXT, FOREIGN KEY (user_id) REFERENCES users(id))');
   }
 
-  /// Ligando as chaves estrangeiras
+  // chaves estrangeiras
   static Future _onConfigure(Database db) async {
     await db.execute('PRAGMA foreign_keys = ON');
   }
 
-  /// Inserir no banco de dados
+  /// Inserir
   static Future<int> insert(String table, Map<String, dynamic> data) async {
     final sqlDb = await SQLDatabase.database;
     return sqlDb.insert(table, data,
