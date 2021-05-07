@@ -7,7 +7,9 @@ import 'package:flutter_lista_compras/telas/updateProduct.dart';
 import 'package:flutter_lista_compras/telas/showProduct.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
