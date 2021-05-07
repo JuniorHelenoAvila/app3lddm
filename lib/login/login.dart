@@ -1,7 +1,12 @@
+/**
+ * Pagina inicial para o login do usuário, caso não tenha conta, clicar em registre-se
+ * para criar a conta
+ */
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_lista_compras/banco_de_dados/banco.dart';
 import 'package:flutter_lista_compras/login/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   static const nameRoute = 'Menu';
@@ -11,7 +16,7 @@ class Login extends StatefulWidget {
 }
 
 class _MenuState extends State<Login> {
-  final _globalKey = GlobalKey<FormState>();
+  final _gk = GlobalKey<FormState>();
 
   var _formValues = {};
 
@@ -23,7 +28,7 @@ class _MenuState extends State<Login> {
       ),
       body: SingleChildScrollView(
         child: Form(
-            key: _globalKey,
+            key: _gk,
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Column(
@@ -67,11 +72,11 @@ class _MenuState extends State<Login> {
                   SizedBox(
                     height: 1,
                   ),
-                  //ElevatedButton(onPressed: _login, child: Text('Login')),
-                  ElevatedButton(
+                  ElevatedButton(onPressed: _login, child: Text('Login')),
+                  /*ElevatedButton(
                       onPressed: () =>
                           Navigator.of(context).pushNamed('MenuApp'),
-                      child: Text('Login')),
+                      child: Text('Login')),*/
                   TextButton(
                       onPressed: () =>
                           Navigator.of(context).pushNamed('Registrar'),
@@ -85,9 +90,9 @@ class _MenuState extends State<Login> {
 
   // Tentar localizar a chave de login do usuário no sistema e logar ele
   _login() {
-    _globalKey.currentState?.save();
+    _gk.currentState?.save();
 
-    if (_globalKey.currentState?.validate() ?? false) {
+    if (_gk.currentState?.validate() ?? false) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Há erro em algum dos campos!')));
 
