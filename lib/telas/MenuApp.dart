@@ -15,8 +15,8 @@ class MenuApp extends StatefulWidget {
 class _MenuAppState extends State<MenuApp> {
   @override
   Widget build(BuildContext context) {
-    //final userID = ModalRoute.of(context)!.settings.arguments as int;
-    final userID = 1;
+    final userID = ModalRoute.of(context)!.settings.arguments as int;
+    //final userID = 1;
 
     return Scaffold(
       drawer: Drawer(
@@ -26,7 +26,7 @@ class _MenuAppState extends State<MenuApp> {
         title: Text('Lista de compras'),
       ),
       body: FutureBuilder(
-          future: _retornarItensUserBD(userID),
+          future: _retornaItens(userID),
           builder:
               (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
             print(snapshot.data.toString());
@@ -52,7 +52,7 @@ class _MenuAppState extends State<MenuApp> {
     );
   }
 
-  Future<List<Map<String, dynamic>>> _retornarItensUserBD(int id) async {
+  Future<List<Map<String, dynamic>>> _retornaItens(int id) async {
     return await SQLDatabase.readById('conta', id);
   }
 
